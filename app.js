@@ -72,7 +72,10 @@ function render() {
         </h2>
       </div>
       <p>🐢 Estrellas: ${students[name].stars}</p>
-      <button onclick="addStar('${name}', event)">+ ⭐</button>
+      <button onclick="addStar('${name}', this)">
+        + ⭐
+      </button>
+
     `;
 
     container.appendChild(div);
@@ -83,20 +86,39 @@ function saveData() {
   localStorage.setItem("students", JSON.stringify(students));
 }
 
-function addStar(name, event) {
+function addStar(name, button) {
   students[name].stars++;
+
+  // 🐢 CONFETTI FIRST (while button still exists)
+  turtleConfetti(button, students[name].stars);
+
+  // Bounce animation
+  button.classList.add("bounce");
+  setTimeout(() => button.classList.remove("bounce"), 300);
+
   saveData();
   render();
+}
 
-  turtleConfetti(
-    event.clientX,
-    event.clientY,
-    students[name].stars
-  );
+function turtleConfetti(button, stars) {
+  const rect = button.getBoundingClientRect();
 
-  const btn = event.target;
-  btn.classList.add("bounce");
-  setTimeout(() => btn.classList.remove("bounce"), 300);
+  const turtleCount = Math.min(3 + stars, 12);
+
+  for (let i = 0; i < turtleCount; i++) {
+    const turtle = document.createElement("div");
+    turtle.textContent = "🐢";
+    turtle.className = "turtle";
+
+    turtle.style.left =
+      rect.left + rect.width / 2 + (Math.random() * 30 - 15) + "px";
+    turtle.style.top =
+      rect.top + window.scrollY + "px";
+
+    document.body.appendChild(turtle);
+
+    setTimeout(() => turtle.remove(), 1200);
+  }
 }
 
 function resetStars() {
@@ -124,23 +146,6 @@ function exportExcel() {
   link.setAttribute("href", url);
   link.setAttribute("download", "participacion_1ero.csv");
   link.click();
-}
-
-function turtleConfetti(x, y, stars) {
-  const turtleCount = Math.min(3 + stars, 12);
-
-  for (let i = 0; i < turtleCount; i++) {
-    const turtle = document.createElement("div");
-    turtle.className = "turtle";
-    turtle.textContent = "🐢";
-
-    turtle.style.left = x + (Math.random() * 40 - 20) + "px";
-    turtle.style.top = y + (Math.random() * 20 - 10) + "px";
-
-    document.body.appendChild(turtle);
-
-    setTimeout(() => turtle.remove(), 1000);
-  }
 }
 
 render();
