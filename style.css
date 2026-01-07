@@ -1,0 +1,123 @@
+body {
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #f2f2f7;
+  text-align: center;
+}
+
+.student {
+  background: white;
+  margin: 15px;
+  padding: 20px;
+  border-radius: 18px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+button {
+  font-size: 22px;
+  padding: 12px 24px;
+  margin: 6px;
+  border: none;
+  border-radius: 12px;
+  background: #a3b18a;
+}
+
+.student-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.student img {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #ffd60a;
+}
+
+#students {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 15px;
+  padding: 10px;
+}
+
+.turtle {
+  position: fixed;
+  font-size: 24px;
+  pointer-events: none;
+  animation: fly 1s ease-out forwards;
+}
+
+@keyframes fly {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120px) scale(1.4);
+    opacity: 0;
+  }
+}
+
+@keyframes bounce {
+  0% { transform: scale(1); }
+  30% { transform: scale(1.2); }
+  60% { transform: scale(0.95); }
+  100% { transform: scale(1); }
+}
+
+button.bounce {
+  animation: bounce 0.3s ease;
+}
+
+.reset-btn {
+  background: #e63946;
+  color: white;
+  font-size: 18px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.export-btn {
+  background: #457b9d;
+  color: white;
+  font-size: 18px;
+  padding: 10px 18px;
+  border-radius: 12px;
+  margin-left: 10px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+#confetti-container {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 9999;
+}
+
+.turtle {
+  position: absolute;
+  font-size: 26px;
+  animation: flyUp 1.2s ease-out forwards;
+}
+
+@keyframes flyUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-120px) scale(1.4);
+    opacity: 0;
+  }
+}
